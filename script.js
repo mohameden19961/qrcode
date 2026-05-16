@@ -2,8 +2,18 @@ const linkInput = document.getElementById('linkInput');
 const generateBtn = document.getElementById('generateBtn');
 const qrcodeContainer = document.getElementById('qrcode');
 const downloadBtn = document.getElementById('downloadBtn');
+const errorMsg = document.getElementById('errorMsg');
 
 let currentQR = null;
+
+function isValidURL(str) {
+    try {
+        new URL(str);
+        return true;
+    } catch {
+        return false;
+    }
+}
 
 function generateQR(text) {
     qrcodeContainer.innerHTML = '';
@@ -30,11 +40,23 @@ function generateQR(text) {
 
 function handleGenerate() {
     let url = linkInput.value.trim();
+    errorMsg.textContent = '';
+    linkInput.style.borderColor = 'rgba(255, 255, 255, 0.15)';
 
-    if (!url) return;
+    if (!url) {
+        errorMsg.textContent = 'Veuillez entrer un lien.';
+        linkInput.style.borderColor = '#ff5252';
+        return;
+    }
 
     if (!/^https?:\/\//i.test(url)) {
         url = 'https://' + url;
+    }
+
+    if (!isValidURL(url)) {
+        errorMsg.textContent = 'Veuillez entrer une URL valide (ex: https://exemple.com).';
+        linkInput.style.borderColor = '#ff5252';
+        return;
     }
 
     generateQR(url);
