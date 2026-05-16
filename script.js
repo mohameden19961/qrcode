@@ -8,8 +8,8 @@ let currentQR = null;
 
 function isValidURL(str) {
     try {
-        new URL(str);
-        return true;
+        const url = new URL(str);
+        return url.hostname.includes('.');
     } catch {
         return false;
     }
