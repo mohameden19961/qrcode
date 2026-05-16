@@ -16,16 +16,7 @@
         img-src 'self' data:;
     " />
 
-    <!-- X-Frame-Options : empêche le site d'être affiché dans une iframe (clickjacking)
-         ⚠ GitHub Pages ne permet PAS de modifier les en-têtes HTTP.
-         Cette balise meta est IGNORÉE par les navigateurs modernes.
-         Seul un en-tête HTTP X-Frame-Options: DENY fonctionne vraiment. -->
-    <meta http-equiv="X-Frame-Options" content="DENY" />
 
-    <!-- X-Content-Type-Options : empêche le MIME sniffing
-         ⚠ Même problème que X-Frame-Options : ignoré en meta, seul l'en-tête HTTP compte.
-         Les navigateurs modernes ne lisent que l'en-tête HTTP. -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
 
     <!-- Referrer-Policy : contrôle les informations envoyées dans l'en-tête Referer
          strict-origin-when-cross-origin = envoie l'origine seule pour les requêtes cross-origin -->
