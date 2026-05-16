@@ -9,6 +9,8 @@ Une application web simple pour générer des QR codes à partir de n'importe qu
 3. Clique sur **Générer** ou appuie sur **Entrée**
 4. Télécharge le QR code en PNG
 
+![Aperçu](screenshot.png)
+
 ## Technologies
 
 - HTML / CSS / JavaScript
