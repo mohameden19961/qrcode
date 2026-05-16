@@ -3,6 +3,46 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Content-Security-Policy : contrôle les sources autorisées (scripts, styles, images, etc.)
+         'self' = même origine
+         https://cdnjs.cloudflare.com = CDN de QRCode.js
+         'unsafe-inline' nécessaire pour l'attribut style="display:none;" sur le bouton
+         img-src data: = permet d'afficher le QR code via toDataURL() -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' https://cdnjs.cloudflare.com;
+        style-src 'self' 'unsafe-inline';
+        img-src 'self' data:;
+    " />
+
+    <!-- X-Frame-Options : empêche le site d'être affiché dans une iframe (clickjacking)
+         ⚠ GitHub Pages ne permet PAS de modifier les en-têtes HTTP.
+         Cette balise meta est IGNORÉE par les navigateurs modernes.
+         Seul un en-tête HTTP X-Frame-Options: DENY fonctionne vraiment. -->
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+
+    <!-- X-Content-Type-Options : empêche le MIME sniffing
+         ⚠ Même problème que X-Frame-Options : ignoré en meta, seul l'en-tête HTTP compte.
+         Les navigateurs modernes ne lisent que l'en-tête HTTP. -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+
+    <!-- Referrer-Policy : contrôle les informations envoyées dans l'en-tête Referer
+         strict-origin-when-cross-origin = envoie l'origine seule pour les requêtes cross-origin -->
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <!-- Permissions-Policy : désactive les API navigateur inutiles pour ce site
+         (géolocalisation, caméra, micro, etc.) -->
+    <meta http-equiv="Permissions-Policy" content="
+        geolocation=(),
+        camera=(),
+        microphone=(),
+        payment=(),
+        usb=(),
+        accelerometer=(),
+        gyroscope=()
+    " />
+
     <title>Générateur de QR Code</title>
     <link rel="icon" type="image/png" href="qrcode.png" />
     <link rel="stylesheet" href="style.css" />
